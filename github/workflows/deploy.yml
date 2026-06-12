@@ -1,0 +1,21 @@
+name: Crypto
+
+on:
+  push:
+    branches: [" master "]
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+
+    steps:
+      uses: action/checout@v4
+
+      run: |
+              echo "TELEGRAM_TOKEN=${{ secrets.TELEGRAM_TOKEN }}" > .env
+              echo "CHAT_ID=${{ secrets.CHAT_ID }}" >> .env
+              echo "SYMBOL=${{ secrets.SYMBOL }}" >> .env
+              echo "ALERT_PERCENT=${{ secrets.ALERT_PERCENT }}" >> .env
+
+      run: |
+              docker compose up -d --build
