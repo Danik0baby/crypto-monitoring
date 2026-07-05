@@ -2,7 +2,7 @@ name: Crypto
 
 on:
   push:
-    branches: [" master "]
+    branches: ["master"]
 
 jobs:
   deploy:
@@ -17,5 +17,5 @@ jobs:
             echo "SYMBOL=${{ secrets.SYMBOL }}" >> .env
             echo "ALERT_PERCENT=${{ secrets.ALERT_PERCENT }}" >> .env
 
-      run:
-            docker compose up -d --build
+      run: |
+          docker compose up --build --abort-on-container-exit --exit-code-from crypto-monitor

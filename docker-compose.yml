@@ -2,6 +2,5 @@ services:
   crypto-monitor:
     build: .
     container_name: my-app
-    restart: always
     env_file:
       - .env
