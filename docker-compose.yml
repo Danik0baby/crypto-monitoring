@@ -2,5 +2,3 @@ services:
   crypto-monitor:
     build: .
     container_name: my-app
-    env_file:
-      - .env
