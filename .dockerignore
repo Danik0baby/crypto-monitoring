@@ -2,3 +2,7 @@ app.log
 __pycache__
 venv
 .venv
+.gitignore
+.git
+.env.example
+test

@@ -2,3 +2,4 @@ services:
   crypto-monitor:
     build: .
     container_name: my-app
+    command: python3 monitor.py
