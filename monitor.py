@@ -1,7 +1,7 @@
 import os
 import time
 import logging
-from config import *
+from utils import *
 
 logging.info("Скрипт процентного мониторинга Bybit запущен...")
 
