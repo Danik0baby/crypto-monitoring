@@ -21,3 +21,7 @@ ALERT_PERCENT = float(os.getenv("ALERT_PERCENT", 1.0))
 if not TELEGRAM_TOKEN or not CHAT_ID:
     logging.critical("Ошибка: TELEGRAM_TOKEN или CHAT_ID не найдены в файле .env!")
     exit(1)
+    
+if not SYMBOL or not ALERT_PERCENT:
+    logging.critical("Ошибка: SYMBOL или ALERT_PERCENT не указали в .env файле")
+    exit(1)
