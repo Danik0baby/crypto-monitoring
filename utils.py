@@ -1,7 +1,13 @@
 import requests
 import logging
 from pybit.unified_trading import HTTP
-from config import *
+from config import (
+    logging,
+    TELEGRAM_TOKEN,
+    CHAT_ID,
+    SYMBOL,
+    ALERT_PERCENT
+)
 
 session = HTTP(testnet=False)
 
