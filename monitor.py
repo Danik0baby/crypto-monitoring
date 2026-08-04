@@ -1,7 +1,17 @@
 import os
 import time
 import logging
-from utils import *
+from utils import (
+    send_telegram_message,
+    get_current_price,
+    session
+)
+from config import (
+    TELEGRAM_TOKEN,
+    CHAT_ID,
+    SYMBOL,
+    ALERT_PERCENT
+)
 
 logging.info("Скрипт процентного мониторинга Bybit запущен...")
 
