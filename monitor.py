@@ -18,32 +18,37 @@ logging.info("Скрипт процентного мониторинга Bybit �
 try:
     base_price = get_current_price()
     logging.info("Начальная базовая цена {} зафиксирована: {} USD".format(SYMBOL, base_price))
-except Exception as e:
-    logging.critical("Не удалось получить начальную цену: {}".format(e))
+except Exception:
+    logging.critical("Не удалось получить начальную цену: {}".format(Exception))
     exit(1)
 
-while True:
-    try:
-        current_price = get_current_price()
-        percent_change = ((current_price - base_price) / base_price) * 100
 
-        logging.info("Цена: {} USD | Изменение: {:+.2f}% (База: {})".format(current_price, percent_change, base_price))
+try:
+    while True:
+        try:
+            current_price = get_current_price()
+            percent_change = ((current_price - base_price) / base_price) * 100
 
-        if abs(percent_change) >= ALERT_PERCENT:
-            message = (
-                "Внимание! Мониторинг {}\n"
-                "Изменение цены: {:+.2f}%\n"
-                "Текущая цена: {} USD\n"
-                "Предыдущая база: {} USD"
-            ).format(SYMBOL, percent_change, current_price, base_price)
+            logging.info("Цена: {} USD | Изменение: {:+.2f}% (База: {})".format(current_price, percent_change, base_price))
 
-            send_telegram_message(message)
-            logging.info("Отправлено уведомление в Telegram. Изменение: {:+.2f}%".format(percent_change))
+            if abs(percent_change) >= ALERT_PERCENT:
+                message = (
+                    "Внимание! Мониторинг {}\n"
+                    "Изменение цены: {:+.2f}%\n"
+                    "Текущая цена: {} USD\n"
+                    "Предыдущая база: {} USD"
+                ).format(SYMBOL, percent_change, current_price, base_price)
 
-            base_price = current_price
-            logging.info("Базовая цена обновлена до: {} USD".format(base_price))
+                send_telegram_message(message)
+                logging.info("Отправлено уведомление в Telegram. Изменение: {:+.2f}%".format(percent_change))
 
-    except Exception as e: 
-        logging.error("Произошла ошибка при выполнении: {}".format(e))
+                base_price = current_price
+                logging.info("Базовая цена обновлена до: {} USD".format(base_price))
 
-    time.sleep(7)
+        except Exception: 
+            logging.error("Произошла ошибка при выполнении: {}".format(Exception))
+
+        time.sleep(7)
+        
+except KeyboardInterrupt:
+    exit(1)
