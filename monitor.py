@@ -39,7 +39,7 @@ try:
                     "Предыдущая база: {} USD"
                 ).format(SYMBOL, percent_change, current_price, base_price)
 
-                send_telegram_message(message)
+                asyncio.run(send_telegram_message(message))
                 logging.info("Отправлено уведомление в Telegram. Изменение: {:+.2f}%".format(percent_change))
 
                 base_price = current_price
@@ -47,7 +47,7 @@ try:
 
         except Exception: 
             logging.error("Произошла ошибка при выполнении: {}".format(Exception))
-
+ 
         time.sleep(7)
         
 except KeyboardInterrupt:
