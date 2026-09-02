@@ -26,3 +26,12 @@
 - ID чата Telegram (можно узнать через [@userinfobot](https://t.me/userinfobot))
 - Docker (опционально, для контейнеризированного запуска)
 
+## Запуск тестов
+
+```bash
+pip install pytest pytest-asyncio aiohttp pybit python-dotenv
+python -m pytest tests/ -v
+```
+
+Все внешние вызовы (Bybit, Telegram) в тестах мокаются — реальные запросы в сеть не выполняются, токен и чат в `.env` для тестов не нужны.
+
